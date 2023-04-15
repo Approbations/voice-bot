@@ -51,18 +51,18 @@ def voice_processing(message):
     os.remove(file_name_full_converted)
 
 tts = TTS()
+
+
 @dp.message_handler(content_types=["help"])
 async def cmd_text(message: types.Message):
     await message.reply("Текст получен")
-
     out_filename = tts.text_to_ogg(message.text)
-
     path = Path("", out_filename)                      # отправка гс
     voice = InputFile(path)
     await bot.send_voice(message.from_user.id, voice,
                          caption="Ответ от бота")
-
     os.remove(out_filename)                            # Удаление временного файла
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -82,6 +82,7 @@ def start(message):
     markup.row(button_Gomer)
     markup.row(button_Android)
     bot.send_message(message.chat.id, 'Скоро голос персонажа будет готов!', reply_markup=markup)
+
 
 if message.text.lower() == "Забудь заботы и держи трубой хвост":
     await bot.send_message(message.chat.id, "Вот и весь секрет живи сто лет акуна матата!")
