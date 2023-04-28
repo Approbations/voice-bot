@@ -33,7 +33,7 @@ def telegram_bot(token):
         bytes_file.seek(0)
         return bytes_file
 
-    def checking_for_easter_eggs(text):
+    def checking_for_easter_eggs(text) -> str:
         easter_eggs = ["забудь заботы и держи трубой хвост!", "ты ходячая котострофа", "первое правило клуба",
                        "быть мертвецом не проблема", "28 ударов ножом",
                        "что вы выберете пиво или спасение души"]
@@ -65,7 +65,7 @@ def telegram_bot(token):
         os.remove(file_name_full)
         os.remove(file_name_full_converted)
 
-    def recognise(filename):
+    def recognise(filename) -> str:
         with sr.AudioFile(filename) as source:
             audio_text = r.listen(source)
             try:
@@ -106,5 +106,4 @@ def telegram_bot(token):
 
 if __name__ == '__main__':
     with open('token.txt', 'r', encoding='UTF-8') as file:
-        data = file.readline()
-        telegram_bot(data)
+        telegram_bot(file.readline())
